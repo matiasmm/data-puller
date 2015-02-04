@@ -1,4 +1,5 @@
-import gearman, time
+import gearman, time, requests
+
 
 def check_request_status(job_request, gm_client):
     gm_client.get_job_status(job_request)
@@ -9,12 +10,12 @@ def check_request_status(job_request, gm_client):
         print "Job %s timed out!" % job_request.unique
     elif job_request.state == JOB_UNKNOWN:
         print "Job %s connection failed!" % job_request.unique
-    else:
-        print "Hola"
+
+r = requests.get("https://api.mercadolibre.com/sites/MLA/search?q=ipod")
 
 gm_client = gearman.GearmanClient(['localhost:4730'])
 
-submitted_job_request = gm_client.submit_job('reverse', 'helllooow world')
+submitted_job_request = gm_client.submit_job('reverse', r.text.encode('utf-8', 'replace'))
 while True:
     check_request_status(submitted_job_request, gm_client)
     time.sleep(1)
