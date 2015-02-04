@@ -1,0 +1,12 @@
+- hosts: local
+  tasks:
+     - pip name=gearman
+#    - name: Rabbitmq enable web management plugin
+#      command: rabbitmq-plugins enable rabbitmq_management
+#      notify: restart rabbitmq
+
+
+#  handlers:
+#    - name: restart rabbitmq
+#      service: name=rabbitmq-server state=restarted
+
