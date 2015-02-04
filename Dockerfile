@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 MAINTAINER Kodemates
  
 RUN apt-get -y update
-RUN sudo apt-get install -yq php5-cli php-pear php5-dev python-pip python-dev
+RUN sudo apt-get install -yq php5-cli php-pear php5-dev python-pip python-dev libyaml-dev
 RUN sudo apt-get install -yq libgearman-dev gearman-job-server gearman-tools
 RUN pecl install gearman
         
