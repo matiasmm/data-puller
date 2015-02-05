@@ -1,6 +1,6 @@
 - hosts: local
   tasks:
-     - pip: name=gearman
+     - pip: requirements=requirements.txt
 #    - name: Rabbitmq enable web management plugin
 #      command: rabbitmq-plugins enable rabbitmq_management
 #      notify: restart rabbitmq

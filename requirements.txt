@@ -1,0 +1,4 @@
+gearman
+
+# This is a fork of requests to use sslv3
+git+https://github.com/joequery/requests-sslv3.git
