@@ -1,12 +1,10 @@
 Installation
 ============
 
-Data puller
-docker build -t datapuller git://repo
-or 
-docker build -t datapuller .
+Build docker image:
 
-docker run -ti datapuller
+    docker build -t datapuller .
 
+Create a container:
 
-
+    docker run -ti -v $(pwd):/opt/app datapuller

@@ -1,12 +1,10 @@
 - hosts: local
+  vars:
+     current_path: "{{ lookup('env','PLAYBOOK_DIR') }}"
   tasks:
-     - pip: requirements=requirements.txt
-#    - name: Rabbitmq enable web management plugin
-#      command: rabbitmq-plugins enable rabbitmq_management
-#      notify: restart rabbitmq
+     - pip: requirements={{current_path}}requirements.txt
+     - pip: name=supervisor
+     - apt: name=mongodb-server
 
 
-#  handlers:
-#    - name: restart rabbitmq
-#      service: name=rabbitmq-server state=restarted
 

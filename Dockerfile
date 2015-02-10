@@ -7,15 +7,19 @@ ENV PYTHONIOENCODING utf8
 
 RUN apt-get -y update
 RUN sudo apt-get install -yq python3-pip python3-dev python-pip python-dev libyaml-dev tmux
-RUN sudo apt-get install -yq libgearman-dev gearman-job-server gearman-tools git-core
+RUN sudo apt-get install -yq libgearman-dev gearman-job-server gearman-tools git-core mongodb-server
 
+RUN easy_install -U pip
 RUN pip install ansible
 
-WORKDIR /tmp
+ENV PLAYBOOK_DIR /tmp/ansible/
 ADD ansible/inventory /etc/ansible/hosts
-ADD ansible/playbook.yml /tmp/playbook.yml
-ADD requirements.txt /tmp/requirements.txt
+ADD ansible /tmp/ansible
+ADD requirements.txt /tmp/ansible/requirements.txt
+WORKDIR /tmp/ansible
 RUN ansible-playbook playbook.yml -c local
 
 WORKDIR /root
+VOLUME ["/data/db"]
+CMD ["/usr/bin/mongod"]
 ENTRYPOINT ["/bin/bash"]
