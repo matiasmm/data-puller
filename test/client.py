@@ -1,4 +1,4 @@
-import gearman, time, requests
+import gearman, time, requests, os
 
 
 def check_request_status(job_request, gm_client):
@@ -15,7 +15,7 @@ r = requests.get("https://api.mercadolibre.com/sites/MLA/search?q=ipod")
 
 gm_client = gearman.GearmanClient(['localhost:4730'])
 
-submitted_job_request = gm_client.submit_job('reverse', str(r.text))
+submitted_job_request = gm_client.submit_job('reverse', r.text.encode('UTF-8'))
 while True:
     check_request_status(submitted_job_request, gm_client)
     time.sleep(1)

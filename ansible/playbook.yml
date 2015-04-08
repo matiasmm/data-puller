@@ -1,8 +1,9 @@
 - hosts: local
+  sudo: yes
   vars:
      current_path: "{{ lookup('env','PLAYBOOK_DIR') }}"
   tasks:
-     - pip: requirements={{current_path}}requirements.txt
+     - pip: requirements={{current_path}}../requirements.txt
      - pip: name=supervisor
      - apt: name=mongodb-server
 
